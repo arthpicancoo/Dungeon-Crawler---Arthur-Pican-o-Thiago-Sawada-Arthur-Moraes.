@@ -26,7 +26,7 @@ Sua jornada comeca agora...
 
 Funçoes do jogo / Como jogar
 
-* = Parede
+'*' = Parede
 . = Chao
 '#' = Espinho
 k = Caixa
@@ -34,7 +34,7 @@ k = Caixa
 D = Porta Fechada
 = = Porta Aberta
 L = Escada
-O = Botão
+O = Botao
 N = NPC
 Z = Boss(Cyclope)
 X = Monstro X(Goblin)
