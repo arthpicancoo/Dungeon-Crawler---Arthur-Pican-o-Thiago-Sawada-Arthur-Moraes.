@@ -1519,4 +1519,4 @@ Codigo do jogo:
 	printf("\nPressione ENTER para voltar ao menu principal...");
 	getchar();
 	getchar();
-}
+	}
