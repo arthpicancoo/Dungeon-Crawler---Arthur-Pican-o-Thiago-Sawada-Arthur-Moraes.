@@ -1,9 +1,10 @@
-Dungeon Crawler
+== Dungeon Crawler ==
 
 Projeto desenvolvido em linguagem C para a disciplina de Algoritmos e codificações de sistemas, do professor Pedro Girotto, do curso de Ciência da
 Computação do Cesupa.
 
 Integrantes
+
 Arthur Picanço
 Thiago Sawada
 Arthur Moraes
@@ -13,112 +14,159 @@ Descrição
 Dungeon Crawler é um jogo de exploração em terminal onde o jogador deve atravessar três andares de uma masmorra, coletando chaves, abrindo portas,
 evitando armadilhas e derrotando monstros até enfrentar o chefe final, um Cyclope.
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+História
 
-#define MAX 25	// Tamanho maximo possivel do mapa.
+Ha muitos anos, uma Dungeon surgiu nas proximidades do reino.
 
-#define PAREDE '*'
-#define CHAO '.'
-#define ESPINHO '#'
-#define CAIXA 'k'
-#define PORTA 'D'			// Define os simbolos do jogo.
-#define PORTA_ABERTA '='
-#define CHAVE '@'
-#define ESCADA 'L'
-#define NPC 'N'
-#define BOTAO 'O'
+Criaturas perigosas passaram asair de suas profundezas e atacar
+os viajantes da regiao, diz a lenda que um terrivel Cyclope vive la.
 
-// Struct Do Jogador: Armazena todas as informacoes importantes do player.
-typedef struct
-{
+Um aventureiro foi escolhido para entrar na Dungeon e derrotar acriatura responsavel por tudo isso.
+Sua jornada comeca agora...
+
+Funçoes do jogo / Como jogar
+
+* = Parede
+. = Chao
+'#' = Espinho
+k = Caixa
+@ = Chave
+D = Porta Fechada
+= = Porta Aberta
+L = Escada
+O = Botão
+N = NPC
+Z = Boss(Cyclope)
+X = Monstro X(Goblin)
+Y = Monstro Y(Esqueleto)
+
+Controles
+
+w = Cima
+a = Esquerda
+s = Baixo
+d = Direita
+o = Atacar
+i = Interagir
+Q = Sair
+
+Objetivo
+
+Matar o cyclope e salvar a vila e todos os seus residentes.
+
+Declaraçao do uso de IA generativa
+
+a IA chatgpt foi utilizada para os ensinamentos de typedef struct, alem de ajudar com os "for" do codigo, a mesma foi usada para ajudar a corrigir
+bugs do jogo e na criaçao da funcao void.
+
+Codigo do jogo:
+
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <time.h>
+
+	#define MAX 25	// Tamanho maximo possivel do mapa.
+
+	#define PAREDE '*'
+	#define CHAO '.'
+	#define ESPINHO '#'
+	#define CAIXA 'k'
+	#define PORTA 'D'			// Define os simbolos do jogo.
+	#define PORTA_ABERTA '='
+	#define CHAVE '@'
+	#define ESCADA 'L'
+	#define NPC 'N'
+	#define BOTAO 'O'
+
+	// Struct Do Jogador: Armazena todas as informacoes importantes do player.
+	typedef struct
+	{
 	int x;          // Posicao X do jogador.
 	int y;          // Posicao Y do jogador.
 	int vidas;      // Quantidade de vidas.
 	int chaves;     // Quantidade de chaves.
 	char dir;       // Direcao que o jogador esta olhando.
-} Player;
+	} Player;
 
-// Struct Dos Monstros: Armazena todas as informacoes importantes dos monstros.
-typedef struct
-{
+	// Struct Dos Monstros: Armazena todas as informacoes importantes dos monstros.
+	typedef struct
+	{
 	int x;
 	int y;
 	int vivo;
-} Monstro;
+	} Monstro;
 
-// Struct Do Boss: Armazena todas as informacoes importantes do boss.
-typedef struct
-{
+	// Struct Do Boss: Armazena todas as informacoes importantes do boss.
+	typedef struct
+	{
 	int x;
 	int y;
 	int vivo;
 	int vida;
 	int cooldownataque;
-} Boss;
+	} Boss;
 
-char mapa[MAX][MAX];	// Matriz principal do mapa.
+	char mapa[MAX][MAX];	// Matriz principal do mapa.
 
-// Variaveis para controlar o tamanho do mapa.
-int larguramapa;
-int alturamapa;
+	// Variaveis para controlar o tamanho do mapa.
+	int larguramapa;
+	int alturamapa;
 
-// Variavel para controlar a fase atual.
-// 0 = Vila
-// 1 = Fase 1
-// 2 = Fase 2
-// 3 = Fase 3
-int faseatual = 0;
+	// Variavel para controlar a fase atual.
+	// 0 = Vila
+	// 1 = Fase 1
+	// 2 = Fase 2
+	// 3 = Fase 3
+	int faseatual = 0;
 
-// Variavel global para o jogador.
-Player player;
+	// Variavel global para o jogador.
+	Player player;
 
-// Variavel global para os monstros.
-Monstro monstroX;
-Monstro monstroY;
+	// Variavel global para os monstros.
+	Monstro monstroX;
+	Monstro monstroY;
 
-// Variavel global para o boss
-Boss boss;
+	// Variavel global para o boss
+	Boss boss;
 
-// 0 = nenhuma
-// 1 = espada
-// 2 = arco
-// 3 = cajado
-int armaescolhida = 0;
+	// 0 = nenhuma
+	// 1 = espada
+	// 2 = arco
+	// 3 = cajado
+	int armaescolhida = 0;
 
-//se o NPC falou com o jogador
-int armaselecionada = 0;
+	//se o NPC falou com o jogador
+	int armaselecionada = 0;
 
-int gameover = 0;
-int botaoativado = 0;
+	int gameover = 0;
+	int botaoativado = 0;
 
-// Prototipos das funções.
-void carregarmapa();
-void carregarvila();
-void carregarfase1();
-void carregarfase2();
-void carregarfase3();
+	// Prototipos das funções.
+	void carregarmapa();
+	void carregarvila();
+	void carregarfase1();
+	void carregarfase2();
+	void carregarfase3();
 
-void desenharmapa();
-void mover(char tecla);
-void atacar();
-void atacarespada();
-void atacararco();
-void atacarcajado();
-void matarmonstro(int x, int y);
-void movermonstros();
-void movermonstroX();
-void movermonstroY();
-void moverboss();
-void interagir();
-void perdervida();
+	void desenharmapa();
+	void mover(char tecla);
+	void atacar();
+	void atacarespada();
+	void atacararco();
+	void atacarcajado();
+	void matarmonstro(int x, int y);
+	void movermonstros();
+	void movermonstroX();
+	void movermonstroY();
+	void moverboss();
+	void interagir();
+	void perdervida();
 
-void jogo();
-void tutorial();
+	void jogo();
+	void tutorial();
 
-int main()
-{
+	int main()
+	{
 	srand(time(NULL));
 
 	int opcao;
@@ -162,11 +210,11 @@ int main()
 	}
 
 	return 0;
-}
+	}
 
-// Função principal do jogo.
-void jogo()
-{
+	// Função principal do jogo.
+	void jogo()
+	{
 	char tecla;
 
 	system("cls || clear");
@@ -265,11 +313,11 @@ void jogo()
 
 		movermonstros();
 	}
-}
+	}
 
-// Função para carregar a fase atual do jogo.
-void carregarmapa()
-{
+	// Função para carregar a fase atual do jogo.
+	void carregarmapa()
+	{
 	switch(faseatual)
 	{
 		// Vila
@@ -292,11 +340,11 @@ void carregarmapa()
 		carregarfase3();
 		break;
 	}
-}
+	}
 
-// Função que carrega a vila.
-void carregarvila()
-{
+	// Função que carrega a vila.
+	void carregarvila()
+	{
 	int i, j;
 
 	// Tamanho do mapa da vila 10x10.
@@ -326,11 +374,11 @@ void carregarvila()
 	// Elementos da fase da vila.
 	mapa[4][4] = NPC;
 	mapa[8][8] = ESCADA;
-}
+	}
 
-// Primeira Fase.
-void carregarfase1()
-{
+	// Primeira Fase.
+	void carregarfase1()
+	{
 	int i, j;
 
 	// Tamanho 10x10.
