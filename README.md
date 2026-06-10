@@ -422,11 +422,11 @@ Codigo do jogo:
 	mapa[7][8] = CAIXA;
 	mapa[8][8] = ESCADA;
 
-}
+	}
 
-// Segunda Fase.
-void carregarfase2()
-{
+	// Segunda Fase.
+	void carregarfase2()
+	{
 	int i, j;
 
 	botaoativado = 0;
@@ -513,11 +513,11 @@ void carregarfase2()
 	monstroX.vivo = 1;
 
 	mapa[monstroX.y][monstroX.x] = 'X';
-}
+	}
 
-// Terceira Fase.
-void carregarfase3()
-{
+	// Terceira Fase.
+	void carregarfase3()
+	{
 	int i, j;
 
 	// Tamanho 25x25.
@@ -722,11 +722,11 @@ void carregarfase3()
 	boss.cooldownataque = 0;
 
 	mapa[boss.y][boss.x] = 'Z';
-}
+	}
 
-// Desenha o mapa na tela.
-void desenharmapa()
-{
+	// Desenha o mapa na tela.
+	void desenharmapa()
+	{
 	int i, j;
 
 	// Limpa a tela.
@@ -786,11 +786,11 @@ void desenharmapa()
 	printf("O = Atacar\n");
 	printf("I = Interagir\n");
 	printf("Q = Sair\n");
-}
+	}
 
-// Movimentação do jogador.
-void mover(char tecla)
-{
+	// Movimentação do jogador.
+	void mover(char tecla)
+	{
 	// Posição temporária atual.
 	int nx = player.x;
 	int ny = player.y;
@@ -905,11 +905,11 @@ void mover(char tecla)
 	// Atualiza a posição do player.
 	player.x = nx;
 	player.y = ny;
-}
+	}
 
-// Sistema de ataque.
-void atacar()
-{
+	// Sistema de ataque.
+	void atacar()
+	{
 	if(armaescolhida == 1)
 	{
 		atacarespada();
@@ -927,11 +927,11 @@ void atacar()
 		printf("\nEscolha uma arma primeiro!\n");
 		system("pause");
 	}
-}
+	}
 
-// Morte dos monstros.
-void matarmonstro(int x, int y)
-{
+	// Morte dos monstros.
+	void matarmonstro(int x, int y)
+	{
 	if(mapa[y][x] == 'X')
 	{
 		mapa[y][x] = CHAO;
@@ -962,11 +962,11 @@ void matarmonstro(int x, int y)
 			mapa[23][23] = ESCADA;
 		}
 	}
-}
+	}
 
-//Ataque da espada.
-void atacarespada()
-{
+	//Ataque da espada.
+	void atacarespada()
+	{
 	int x, y;
 
 	if(player.dir == '^')
@@ -1063,11 +1063,11 @@ void atacarespada()
 
 	printf("\nGolpe de espada executado!\n");
 	system("pause");
-}
+	}
 
-//Ataque do arco.
-void atacararco()
-{
+	//Ataque do arco.
+	void atacararco()
+	{
 	int i;
 	int x;
 	int y;
@@ -1100,11 +1100,11 @@ void atacararco()
 
 	printf("\nFlecha disparada!\n");
 	system("pause");
-}
+	}
 
-//Ataque do cajado.
-void atacarcajado()
-{
+	//Ataque do cajado.
+	void atacarcajado()
+	{
 	int x;
 	int y;
 
@@ -1139,11 +1139,11 @@ void atacarcajado()
 
 	printf("\nMagia do cajado utilizada!\n");
 	system("pause");
-}
+	}
 
-// Sistema de interação.
-void interagir()
-{
+	// Sistema de interação.
+	void interagir()
+	{
 	// Posição da interação.
 	int tx = player.x;
 	int ty = player.y;
@@ -1283,11 +1283,11 @@ void interagir()
 		system("pause");
 
 	}
-}
+	}
 
-// Sistema de perder vida.
-void perdervida()
-{
+	// Sistema de perder vida.
+	void perdervida()
+	{
 	// Remove uma vida.
 	player.vidas--;
 
@@ -1314,11 +1314,11 @@ void perdervida()
 	carregarmapa();
 
 	system("pause");
-}
+	}
 
-// IA do monstro X
-void movermonstroX()
-{
+	// IA do monstro X
+	void movermonstroX()
+	{
 	int dx[4] = {0, 0, -1, 1};
 	int dy[4] = { -1, 1, 0, 0};
 
@@ -1339,11 +1339,11 @@ void movermonstroX()
 	monstroX.y = ny;
 
 	mapa[monstroX.y][monstroX.x] = 'X';
-}
+	}
 
-//IA do monstro Y
-void movermonstroY()
-{
+	//IA do monstro Y
+	void movermonstroY()
+	{
 	int nx = monstroY.x;
 	int ny = monstroY.y;
 
@@ -1375,11 +1375,11 @@ void movermonstroY()
 	monstroY.y = ny;
 
 	mapa[monstroY.y][monstroY.x] = 'Y';
-}
+	}
 
-//IA do boss
-void moverboss()
-{
+	//IA do boss
+	void moverboss()
+	{
 	if(!boss.vivo)
 		return;
 
@@ -1456,11 +1456,11 @@ void moverboss()
 		printf("\nBOSS TE ACERTOU!\n");
 		perdervida();
 	}
-}
+	}
 
-// Variável universal para mover monstros.
-void movermonstros()
-{
+	// Variável universal para mover monstros.
+	void movermonstros()
+	{
 	movermonstroX();
 	movermonstroY();
 	moverboss();
@@ -1478,11 +1478,11 @@ void movermonstros()
 	{
 		perdervida();
 	}
-}
+	}
 
-// Tela de tutorial.
-void tutorial()
-{
+	// Tela de tutorial.
+	void tutorial()
+	{
 	system("cls");
 
 	printf("===== TUTORIAL =====\n\n");
