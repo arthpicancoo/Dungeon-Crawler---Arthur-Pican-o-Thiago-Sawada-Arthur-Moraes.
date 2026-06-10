@@ -1,5 +1,101 @@
-# Dungeon-Crawler---Arthur-Pican-o-Thiago-Sawada-Arthur-Moraes.
-O dungeon crawler é um jogo feito em C, para uma avaliação da faculdade, feito por Arthur Picanço, Thiago Sawada e Arthur Moraes.
+Dungeon Crawler
+
+Projeto desenvolvido em linguagem C para a disciplinar de Algoritmos e codificações de sistemas.
+
+Integrantes
+Arthur Picanço
+Thiago Sawada
+Arthur Moraes
+Descrição
+
+Dungeon Crawler é um jogo de exploração em terminal onde o jogador deve atravessar três andares de uma masmorra, coletando chaves, abrindo portas,
+evitando armadilhas e derrotando monstros até enfrentar o chefe final, um Cyclope.
+
+Funcionalidades
+Sistema de movimentação (WASD)
+Sistema de combate
+Escolha de arma
+Espada
+Arco
+Cajado
+NPC para seleção de arma
+Chaves e portas
+Espinhos que causam dano
+Monstros com IA diferente
+Boss com múltiplos ataques
+Sistema de vidas
+Sistema de vitória e derrota
+História inicial e final
+
+Controles
+Tecla	Função
+W	Mover para cima
+A	Mover para esquerda
+S	Mover para baixo
+D	Mover para direita
+O	Atacar
+I	Interagir
+Q	Sair
+Símbolos
+Símbolo	Significado
+*	Parede
+.	Chão
+#	Espinho
+k	Caixa
+@	Chave
+D	Porta Fechada
+=	Porta Aberta
+L	Escada
+N	NPC
+O	Botão
+X	Goblin
+Y	Esqueleto
+Z	Cyclope (Boss)
+
+Como Compilar
+
+GCC:
+
+gcc dungeon_crawler.c -o dungeon
+
+Como Executar
+
+Windows:
+
+dungeon.exe
+
+Linux:
+
+./dungeon
+
+Estrutura do Jogo
+Vila
+Conversa com NPC
+Escolha da arma inicial
+Andar 1
+Introdução às mecânicas
+Primeira chave e porta
+Andar 2
+Botão secreto
+Armadilhas
+Primeiro monstro
+Andar 3
+Múltiplas chaves
+Dois tipos de monstros
+Batalha contra o Ciclope
+Tecnologias Utilizadas
+Linguagem C
+Biblioteca padrão:
+stdio.h
+stdlib.h
+time.h
+Objetivo
+
+Explorar toda a dungeon, derrotar o Ciclope e restaurar a paz ao reino.
+
+Projeto Acadêmico
+
+Projeto desenvolvido para fins educacionais na disciplina de Algoritmos e codificações de sistemas.
 
 #include <stdio.h>
 #include <stdlib.h>
